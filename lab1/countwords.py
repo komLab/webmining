@@ -1,4 +1,5 @@
 import operator
+import matplotlib.pyplot as plt
 
 filename = './ger1'
 
@@ -89,5 +90,33 @@ def aufgabe_2b():
 	#print( sorted(my_hash.iteritems(), key=operator.itemgetter(1), reverse=True))
 	#print( get_hash( get_words( get_text() ) ) )
 
+def aufgabe_3a():#Zipf's
+	my_words	= get_words( get_text() )
+	my_stoppwords	= get_stoppwords()
+	(my_hash, total_wordcount) = get_hash_without_stoppwords( my_words, my_stoppwords )
+	my_sorted	= sorted(my_hash.values(), reverse=True)
+	
+	my_hash2	= get_hash( my_words )
+	my_sorted2	= sorted(my_hash2.values(), reverse=True)
+	
+	plt.plot(my_sorted)
+	plt.plot(my_sorted2)
+	plt.ylabel('Appearance')
+	plt.xlabel('Rank')
+	plt.title('Die Brueder Wright - Wordappearance')
+	plt.yscale('log')
+	plt.xscale('log')
+	plt.legend(['no stoppwords', 'stoppwords'])
+	plt.show()
+
 if __name__ == '__main__':
-	aufgabe_2b()
+	aufgabe_3a()
+	
+	
+	
+	
+	
+	
+	
+	
+	
