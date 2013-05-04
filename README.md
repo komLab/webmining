@@ -1,1 +1,3 @@
-webmining lecture
+Webmining lecture
+
+for example script for text classification
