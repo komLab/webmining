@@ -1,7 +1,8 @@
 import operator
 import matplotlib.pyplot as plt
 
-filename = './ger1'
+filename = './eng1_longtxt'
+stopwords = './english'
 
 def get_text():
 	fh 	= open( filename, 'r' )
@@ -48,7 +49,7 @@ def get_hash_without_stoppwords( word_list, stoppword_list ):
 	return (wordcount_hash, count)
 
 def get_stoppwords():
-	fh 	= open( './german', 'r' )
+	fh 	= open( stopwords, 'r' )
 	words 	= set( line.strip() for line in fh )
 	fh.close()
 	return words
@@ -99,14 +100,47 @@ def aufgabe_3a():#Zipf's
 	my_hash2	= get_hash( my_words )
 	my_sorted2	= sorted(my_hash2.values(), reverse=True)
 	
-	plt.plot(my_sorted)
-	plt.plot(my_sorted2)
+	plt.figure(1)
+	plt.plot(my_sorted,'r.')
+	plt.plot(my_sorted2,'g.')
 	plt.ylabel('Appearance')
 	plt.xlabel('Rank')
-	plt.title('Die Brueder Wright - Wordappearance')
+	plt.title('%s - Wordappearance' % filename )
 	plt.yscale('log')
 	plt.xscale('log')
-	plt.legend(['no stoppwords', 'stoppwords'])
+	plt.legend(['no stopwords', 'stopwords'])
+	plt.show()
+	plt.figure(2)
+	plt.plot(my_sorted,'r.')
+	plt.plot(my_sorted2,'g.')
+	plt.ylabel('Appearance')
+	plt.xlabel('Rank')
+	plt.title('%s - Wordappearance' % filename )
+	plt.legend(['no stopwords', 'stopwords'])
+	plt.show()
+	
+def aufgabe_3b():
+	my_words	= get_words( get_text() )
+	my_stoppwords	= get_stoppwords()
+	(my_hash, total_wordcount) = get_hash_without_stoppwords( my_words, my_stoppwords )
+	my_sorted	= sorted(my_hash.values())
+	
+	
+	
+	last_value = my_sorted[ len(my_sorted)-1 ] 
+	appearance = 0;
+	histogram = []
+	for i in range(1, last_value+1 ):
+		appearance = my_sorted[i:].count( i )
+		if appearance:
+			histogram.append( appearance )
+	
+	plt.plot( histogram, 'r.' )
+	plt.yscale('log')
+	plt.xscale('log')
+	plt.ylabel('# of words')
+	plt.xlabel('# of wordappearances')
+	plt.title('%s - Wordappearance' % filename )
 	plt.show()
 
 if __name__ == '__main__':
