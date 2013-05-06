@@ -2,7 +2,7 @@ import operator
 import matplotlib.pyplot as plt
 
 
-filename = './ger1'
+filename = './eng1'
 stopwords = './german'
 
 def get_text():
@@ -227,7 +227,7 @@ def aufgabe_4b():
 	#print( get_hash( get_words( get_text() ) ) )	
 
 if __name__ == '__main__':
-	aufgabe_3b()
+	aufgabe_4b()
 	
 	
 	
